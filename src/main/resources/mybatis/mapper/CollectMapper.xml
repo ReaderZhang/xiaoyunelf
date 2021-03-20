@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qqz.firstproject.dao.CollectMapper">
+    <sql id="collectColumn">
+        cid,
+        content,
+        type,
+        user.uid
+    </sql>
+    <resultMap id="collectMap" type="com.qqz.firstproject.pojo.Collect">
+        <id property="cid" column="cid"/>
+        <result property="content" column="content"/>
+        <result property="type" column="type"/>
+        <association property="user" javaType="com.qqz.firstproject.pojo.User">
+            <id property="uid" column="uid"/>
+            <result property="uname" column="uname"/>
+            <result property="grade" column="grade"/>
+            <result property="gender" column="gender"/>
+            <result property="phone" column="phone"/>
+            <result property="password" column="password"/>
+            <result property="image" column="image"/>
+            <result property="starttime" column="starttime"/>
+            <result property="status" column="status"/>
+        </association>
+    </resultMap>
+    <select id="selectCollectNote">
+        select <include refid="collectColumn"/>
+        from user,collect
+        where user.uid = collect.uid and type = #{type} and uid=#{uid}
+    </select>
+    <insert id="insertCollectNote" parameterType="com.qqz.firstproject.pojo.Collect">
+        insert into collect(content,type,uid)
+        values(#{content},#{type},#{user.id})
+    </insert>
+    <delete id="deleteCollectNote" parameterType="com.qqz.firstproject.pojo.Collect">
+        delete *
+        from user
+        where uid = #{uid},content = #{content},type =#{type}
+    </delete>
+</mapper>
