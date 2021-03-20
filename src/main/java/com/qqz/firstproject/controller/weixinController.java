@@ -24,9 +24,9 @@ import java.util.Map;
 public class weixinController {
     @Autowired
     private OrderMapper orderMapper;
-    private String url = "https://api.weixin.qq.com/sns/jscode2session";
-    private static final String APP_ID = "wxfaf7cef56645f261";
-    private static final String APP_SECRET = "dd4ccd7ca907e49b177ab5ef13985ba0";
+    private String url = "xxxxxxxxxxxxxxxx";
+    private static final String APP_ID = "xxxxxxxxxxxxxxxxx";
+    private static final String APP_SECRET = "xxxxxxxxxxxxxxxxx";
 
     @GetMapping("/wx/getLogin/{code}")
     public String WXGetLogin(@PathVariable("code") String code){
